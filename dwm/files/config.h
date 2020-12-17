@@ -149,11 +149,11 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_l,      setmfact,       {.f = +0.01} },
 	/* { MODKEY,                       XK_n,      switchcol,      {0} }, */
 	{ MODKEY|ShiftMask,             XK_n,      focusurgent,    {0} },
-	{ MODKEY|Mod4Mask,              XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	/* { MODKEY,                       XK_x,      zoomswap,       {0} }, */
 	/* { MODKEY,                       XK_Return, zoom,           {0} }, */
 	{ MODKEY,                       XK_Return, zoomswap,           {0} },
-	{ MODKEY|ShiftMask,             XK_Return, switchcol,           {0} },
+	{ MODKEY|ControlMask,           XK_Return, switchcol,           {0} },
 	/* { MODKEY|ControlMask,           XK_Return, transfer,           {0} }, */
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
