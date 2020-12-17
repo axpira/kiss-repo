@@ -1,0 +1,33 @@
+diff --git a/dwm.c b/dwm.c
+index 9fd0286..ab11da0 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -1234,6 +1234,8 @@ propertynotify(XEvent *e)
+ 		case XA_WM_HINTS:
+ 			updatewmhints(c);
+ 			drawbars();
++			if (c->isurgent)
++				XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFg].pixel);
+ 			break;
+ 		}
+ 		if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
+diff --git a/focusurgent.c b/focusurgent.c
+new file mode 100644
+index 0000000..bc6eee6
+--- /dev/null
++++ b/focusurgent.c
+@@ -0,0 +1,14 @@
++static void
++focusurgent(const Arg *arg) {
++	Client *c;
++	int i;
++	for(c=selmon->clients; c && !c->isurgent; c=c->next);
++	if(c) {
++		for(i=0; i < LENGTH(tags) && !((1 << i) & c->tags); i++);
++		if(i < LENGTH(tags)) {
++			const Arg a = {.ui = 1 << i};
++			view(&a);
++			focus(c);
++		}
++	}
++}

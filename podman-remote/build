@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+make podman-remote
+
+make DESTDIR="$1" PREFIX=/usr install.remote install.completions

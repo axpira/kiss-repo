@@ -1,0 +1,14 @@
+bash make
+#conmon
+go make
+#gpgme
+#libassuan
+#libgpg-error
+#libseccomp
+#runc
+#slirp4netns-bin
+#gpgme
+#libassuan
+#libgpg-error
+#libseccomp
+#conmon

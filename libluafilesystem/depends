@@ -1,0 +1,5 @@
+gtk+3
+lua
+luajit
+webkit2gtk
+sqlite

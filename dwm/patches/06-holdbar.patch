@@ -1,0 +1,92 @@
+diff --git a/dwm.c b/dwm.c
+index 9fd0286..11d5814 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -234,6 +234,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
+ static int xerrordummy(Display *dpy, XErrorEvent *ee);
+ static int xerrorstart(Display *dpy, XErrorEvent *ee);
+ static void zoom(const Arg *arg);
++static void keyrelease(XEvent *e);
+ 
+ /* variables */
+ static const char broken[] = "broken";
+@@ -246,6 +247,7 @@ static int (*xerrorxlib)(Display *, XErrorEvent *);
+ static unsigned int numlockmask = 0;
+ static void (*handler[LASTEvent]) (XEvent *) = {
+ 	[ButtonPress] = buttonpress,
++	[ButtonRelease] = keyrelease,
+ 	[ClientMessage] = clientmessage,
+ 	[ConfigureRequest] = configurerequest,
+ 	[ConfigureNotify] = configurenotify,
+@@ -254,6 +256,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
+ 	[Expose] = expose,
+ 	[FocusIn] = focusin,
+ 	[KeyPress] = keypress,
++	[KeyRelease] = keyrelease,
+ 	[MappingNotify] = mappingnotify,
+ 	[MapRequest] = maprequest,
+ 	[MotionNotify] = motionnotify,
+@@ -1702,7 +1705,7 @@ tile(Monitor *m)
+ void
+ togglebar(const Arg *arg)
+ {
+-	selmon->showbar = !selmon->showbar;
++	selmon->showbar = (selmon->showbar == 2 ? 1 : !selmon->showbar);
+ 	updatebarpos(selmon);
+ 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+ 	arrange(selmon);
+diff --git a/holdbar.c b/holdbar.c
+new file mode 100644
+index 0000000..c80cd0d
+--- /dev/null
++++ b/holdbar.c
+@@ -0,0 +1,49 @@
++
++static void holdbar(const Arg *arg);
++static void updateholdbarpos(Monitor *m);
++
++void
++holdbar(const Arg *arg)
++{
++	if (selmon->showbar)
++		return;
++	spawn(arg);
++	selmon->showbar = 2;
++	updateholdbarpos(selmon);
++	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
++}
++
++void
++keyrelease(XEvent *e)
++{
++	if (XEventsQueued(dpy, QueuedAfterReading)) {
++		XEvent ne;
++		XPeekEvent(dpy, &ne);
++
++		if (ne.type == KeyPress && ne.xkey.time == e->xkey.time &&
++				ne.xkey.keycode == e->xkey.keycode) {
++			XNextEvent(dpy, &ne);
++			return;
++		}
++	}
++	if (e->xkey.keycode == XKeysymToKeycode(dpy, HOLDKEY) && selmon->showbar == 2) {
++		selmon->showbar = 0;
++		updateholdbarpos(selmon);
++		XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
++		arrange(selmon);
++	}
++}
++
++void
++updateholdbarpos(Monitor *m)
++{
++	m->wy = m->my;
++	m->wh = m->mh;
++	if (m->showbar) {
++		m->by = m->topbar ? m->wy : m->wy + m->wh - bh;
++		m->wy = m->topbar ? m->wy - bh + bh : m->wy;
++	} else {
++		m->by = -bh;
++	}
++}
++

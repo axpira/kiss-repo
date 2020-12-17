@@ -1,0 +1,4 @@
+https://dl.suckless.org/st/st-0.8.4.tar.gz
+patches/st-externalpipe-0.8.4.patch
+patches/st-keyboard_select-20200617-9ba7ecf.patch
+files/config.h

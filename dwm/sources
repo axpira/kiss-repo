@@ -1,0 +1,17 @@
+git+https://git.suckless.org/dwm
+#https://dl.suckless.org/dwm/dwm-6.2.tar.gz
+patches/00-moveplace.patch
+patches/00-moveresize.patch
+patches/00-movestack.patch
+patches/00-setborderpx.patch
+patches/00-switchcol.patch
+patches/00-zoomswap.patch
+#patches/00-transfer.patch
+patches/01-dwm-pertag.patch
+patches/02-dwm-ru_gaps-cfacts-setborderpx.patch
+patches/03-dwm-fakefullscreen.patch
+patches/04-urg-border-min.patch
+patches/05-namedscratchpads.patch
+patches/06-holdbar.patch
+#patches/07-focusonclick.patch
+files/config.h

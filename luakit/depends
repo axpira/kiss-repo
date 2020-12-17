@@ -1,0 +1,6 @@
+gtk+3
+lua
+#luajit
+libluafilesystem
+webkit2gtk
+sqlite

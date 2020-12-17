@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+#export LUA_BIN_NAME=lua
+#sed -i'' "s/LUA_PKG_NAMES +=/LUA_PKG_NAMES += lua/" config.mk
+ #USE_LUAJIT=1
+#export LUA_VERSION=5.1
+export LUA_PKG_NAMES=lua luajit
+export LUA_BIN_NAMES=lua luajit
+
+make PREFIX=/usr USE_LUAJIT=1
+make PREFIX=/usr DESTDIR="$1" install

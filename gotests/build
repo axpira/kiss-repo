@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+cd gotests
+go build
+
+install -Dm755 gotests "$1/usr/bin/gotests"

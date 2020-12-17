@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+#sed -i '/LUA_VERSION = 5.1/LUA_VERSION = 5.4/'
+
+make PREFIX=/usr
+#make DESTDIR="$1" LUA_LIBDIR=/usr/lib/lua/5.4 install
+#make DESTDIR="$1" LUA_LIBDIR=/usr/lib/lua/5.4 install
+make PREFIX=/usr DESTDIR="$1" install

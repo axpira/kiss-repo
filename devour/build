@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+make
+
+install -Dm755 devour "$1/usr/bin/devour"

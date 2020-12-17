@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+cargo build --release
+
+install -Dm755 target/release/watchexec "$1/usr/bin/watchexec"
+install -Dm644 doc/watchexec.1 "$1/usr/share/man/man1/watchexec.1"
