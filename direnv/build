@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+go build
+
+install -Dm755 direnv "$1/usr/bin/direnv"
