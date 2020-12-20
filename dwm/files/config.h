@@ -6,7 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappx     = 3;                 /* gaps between windows */
 static const int showbar            = 2;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int focusonwheel       = 0;
+static const int focusonwheel       = 1;
 //static const char *fonts[]          = { "monospace:size=12" };
 static const char *fonts[]          = { "FiraCode Nerd Font:style=Retina,Regular:size=12" , "monospace:size=18" };
 //static const char dmenufont[]       = "monospace:size=12";
@@ -36,7 +36,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.75; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
